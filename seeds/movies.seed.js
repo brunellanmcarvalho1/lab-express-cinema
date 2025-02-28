@@ -86,19 +86,19 @@ const movies = [
 ];
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGODB_URI)
   .then((x) =>
-    console.log(`Conected to Mongo! Database name: "${x.conections[0].name}"`)
+    console.log(`Conected to Mongo! Database name: "${x.connections[0].name}"`)
   )
   .then(() => {
     Movie.create(movies)
-      .then((Movie) => {
-        console.log("Movies created ->", Movie);
-        mongoose.conection.close();
+      .then((movies) => {
+        console.log("Movies created ->", movies);
+        mongoose.connection.close();
       })
       .catch((error) => {
         console.error("Error while creating movies ->", error);
-        mongoose.conection.close();
+        mongoose.connection.close();
       });
   });
 
